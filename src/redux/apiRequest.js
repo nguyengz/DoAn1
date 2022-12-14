@@ -46,3 +46,14 @@ export const AddProduct = async (product, dispatch, navigate) => {
         dispatch(addProductFailed());
     }
 };
+export const getProduct = async (product, dispatch) => {
+    dispatch(getUserStart());
+    try {
+        const res = await axios.get('https://reqres.in/api/users?page=2', {
+            headers: { token: `Bearer ${accesssToken}` } // Chữ Bearer phụ thuộc vào từng cái token
+        });
+        dispatch(getUserSuccess(res.data));
+    } catch (err) {
+        dispatch(getUserFailed());
+    }
+};
